@@ -289,8 +289,11 @@ $(document).ready(function() {
 
 				fetch(scriptURL, { 
 					method: 'POST', 
-					body: new URLSearchParams(formData), 
-					mode: 'no-cors' 
+					body: new URLSearchParams(formData).toString(), 
+					mode: 'no-cors',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
 				})
 				.then(function() {
 					console.log('Successfully saved to Google Sheet!');
