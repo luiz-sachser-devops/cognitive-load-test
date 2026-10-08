@@ -270,6 +270,23 @@ $(document).ready(function() {
 				formData.append("Frustration", data_object["slider_value"][5]);
 				formData.append("Overall_TLX_Score", Math.round(sum/weights));
 
+				var detailedTable = [
+					["Demand", "Rating", "Weight", "Product"]
+				];
+				for (var k = 0; k < demands.length; k++ ) {
+					detailedTable.push([
+						demands[k][1], 
+						data_object["slider_value"][k], 
+						data_object["button_clicks"][k], 
+						data_object["slider_value"][k] * data_object["button_clicks"][k]
+					]);
+				}
+				detailedTable.push(["Product sum", "", "", sum]);
+				detailedTable.push(["Total weights", "", "", weights]);
+				detailedTable.push(["Rounded TLX score", "", "", Math.round(sum/weights)]);
+				
+				formData.append("Detailed_Table", JSON.stringify(detailedTable));
+
 				var form = document.createElement("form");
 				form.action = scriptURL;
 				form.method = "POST";
