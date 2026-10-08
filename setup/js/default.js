@@ -310,7 +310,11 @@ $(document).ready(function() {
 
 				document.body.appendChild(form);
 				form.submit();
-				document.body.removeChild(form);
+				setTimeout(function() {
+					if (document.body.contains(form)) {
+						document.body.removeChild(form);
+					}
+				}, 1000);
 			}
 			// -------------------------------------
 
