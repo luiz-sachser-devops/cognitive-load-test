@@ -270,18 +270,30 @@ $(document).ready(function() {
 				formData.append("Frustration", data_object["slider_value"][5]);
 				formData.append("Overall_TLX_Score", Math.round(sum/weights));
 
-				var urlEncodedData = new URLSearchParams(formData).toString();
+				var form = document.createElement("form");
+				form.action = scriptURL;
+				form.method = "POST";
+				form.target = "hidden_iframe";
 
-				fetch(scriptURL, { 
-					method: 'POST', 
-					body: urlEncodedData, 
-					mode: 'no-cors',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}
-				})
-					.then(response => console.log('Successfully saved to Google Sheet!', response))
-					.catch(error => console.error('Error saving to Google Sheet!', error.message));
+				for (var pair of formData.entries()) {
+					var input = document.createElement("input");
+					input.type = "hidden";
+					input.name = pair[0];
+					input.value = pair[1];
+					form.appendChild(input);
+				}
+
+				if (!document.getElementById("hidden_iframe")) {
+					var iframe = document.createElement("iframe");
+					iframe.id = "hidden_iframe";
+					iframe.name = "hidden_iframe";
+					iframe.style.display = "none";
+					document.body.appendChild(iframe);
+				}
+
+				document.body.appendChild(form);
+				form.submit();
+				document.body.removeChild(form);
 			}
 			// -------------------------------------
 
