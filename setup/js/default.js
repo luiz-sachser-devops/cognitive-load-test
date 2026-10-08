@@ -270,7 +270,16 @@ $(document).ready(function() {
 				formData.append("Frustration", data_object["slider_value"][5]);
 				formData.append("Overall_TLX_Score", Math.round(sum/weights));
 
-				fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+				var urlEncodedData = new URLSearchParams(formData).toString();
+
+				fetch(scriptURL, { 
+					method: 'POST', 
+					body: urlEncodedData, 
+					mode: 'no-cors',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				})
 					.then(response => console.log('Successfully saved to Google Sheet!', response))
 					.catch(error => console.error('Error saving to Google Sheet!', error.message));
 			}
