@@ -289,7 +289,7 @@ $(document).ready(function() {
 
 				fetch(scriptURL, { 
 					method: 'POST', 
-					body: formData, 
+					body: new URLSearchParams(formData), 
 					mode: 'no-cors' 
 				})
 				.then(function() {
