@@ -9,11 +9,21 @@ From the respective [Wikipedia article](http://en.wikipedia.org/wiki/NASA-TLX):
 
 Learn more about it at the official [NASA-TLX website](http://humansystems.arc.nasa.gov/groups/TLX/). You can also take a look at the original paper [<cite>Development of NASA-TLX (Task Load Index): Results of Empirical and Theoretical Research</cite>](http://humansystems.arc.nasa.gov/groups/TLX/downloads/NASA-TLXChapter.pdf) (PDF format, 1.4 MB).
 
-## Features
-More infos to follow soon …
+## Custom Modifications for Relish Food Memories Workshop
+This fork has been specifically modified to run the **Relish Food Memories Workshop Cognitive Load Test**. 
 
-## Installation
-No installation required. Just [download](https://github.com/isellsoap/nasa-tlx/archive/master.zip) the ZIP file, unzip it and open `index.html` with a browser of your choice.
+Key features added to this version:
+- **Simplified Participant Input**: Removed complex "Proband" and "Task" creation in Step 1. It now just asks for the Participant's Name.
+- **CSV Download**: Researchers can instantly download a CSV file containing all test results recorded in the local browser session.
+- **Google Sheets Integration (Optional Backend)**: Seamlessly configured to automatically push results to a Google Sheet via Google Apps Script the moment a participant completes the test. This enables remote testing where participants use their own devices.
+
+## Installation / Usage
+No server installation is required. This is a static HTML/JS web app.
+1. Download the code or clone the repository.
+2. Open `index.html` in your browser.
+3. **Optional (Google Sheets Setup):** 
+   - Create a Google Apps Script Web App to handle POST requests.
+   - Insert your Web App URL into `var scriptURL = '...'` located around line 258 of `setup/js/default.js`.
 
 ## Tested browsers
 At this point I tested the implementation with the latest versions of
