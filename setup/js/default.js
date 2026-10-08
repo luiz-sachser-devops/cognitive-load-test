@@ -287,34 +287,17 @@ $(document).ready(function() {
 				
 				formData.append("Detailed_Table", JSON.stringify(detailedTable));
 
-				var form = document.createElement("form");
-				form.action = scriptURL;
-				form.method = "POST";
-				form.target = "hidden_iframe";
-
-				for (var pair of formData.entries()) {
-					var input = document.createElement("input");
-					input.type = "hidden";
-					input.name = pair[0];
-					input.value = pair[1];
-					form.appendChild(input);
-				}
-
-				if (!document.getElementById("hidden_iframe")) {
-					var iframe = document.createElement("iframe");
-					iframe.id = "hidden_iframe";
-					iframe.name = "hidden_iframe";
-					iframe.style.display = "none";
-					document.body.appendChild(iframe);
-				}
-
-				document.body.appendChild(form);
-				form.submit();
-				setTimeout(function() {
-					if (document.body.contains(form)) {
-						document.body.removeChild(form);
-					}
-				}, 1000);
+				fetch(scriptURL, { 
+					method: 'POST', 
+					body: formData, 
+					mode: 'no-cors' 
+				})
+				.then(function() {
+					console.log('Successfully saved to Google Sheet!');
+				})
+				.catch(function(error) {
+					console.error('Error saving to Google Sheet!', error);
+				});
 			}
 			// -------------------------------------
 
